@@ -75,6 +75,7 @@ function makeWork (arrOfArr, func) {
     maxWorkerResult=funcResult;
    }
   }
-  return maxWorkerResult;
+  return maxWorkerResult; 
+  
 }
 
