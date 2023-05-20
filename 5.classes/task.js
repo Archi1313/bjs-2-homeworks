@@ -13,19 +13,19 @@ class PrintEditionItem {
 		} 
 		else if (state>100) {
 			this._state=100;
-		} else this._state=state;
+		} else {
+		   this._state=state;
 	}
+}
 
 	get state(){
 		return this._state;
 	}
 		
 	
-   fix=function(){
+   fix(){
     this.state=this.state*1.5;
-    if (this.state>100) {
-   	 this.state=100;
-    }
+    
    }
 }
 
@@ -104,7 +104,7 @@ setSubject(subjectName) {
   this.subject=subjectName;
 }
 
-addMark(mark,subject) {
+addMark(mark, subject) {
 	if (mark>=2 && mark<=5){
   		if (!this.marks[subject]){
      		this.marks[subject]=[];
@@ -120,13 +120,13 @@ exclude(reason) {
   this.excluded=reason;
 }
 
-getAverageBySubject(subject){
+getAverageBySubject(subject) {
 	if (this.marks[subject]){
 	    return this.marks[subject].reduce((averageMark,mark) => averageMark+mark/this.marks[subject].length,0)	
 	} else return 0;
 }
 
-getAverage() {
+getAverage(){
     if (Object.keys(this.marks).length>0) {
     let keys=Object.keys(this.marks);
 	let sum=keys.reduce((acc,avMark) =>acc+this.getAverageBySubject(avMark),0);
