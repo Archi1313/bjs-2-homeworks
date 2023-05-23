@@ -1,51 +1,58 @@
-function parseCount(value){
-	if (!Number.parseFloat(value)) {
-		const error=new Error("Невалидное значение");
-		throw error;
- 		} 
-	return Number.parseFloat(value);
-}  
-
-
-function validateCount(value){
-	try {
- 		if (parseCount(value)) {
- 			return parseCount(value);
- 			}
- 		} 
- 	catch (error){
-  	 return error;
-  	 }
+function parseCount(value) {
+	let parseRes = Number.parseFloat(value);
+	if (!parseRes) {
+		throw new Error("Невалидное значение");
+	}
+	return parseRes;
 }
-	
+
+
+function validateCount(value) {
+	try {
+		let parseRes = parseCount(value);
+		if (parseRes) {
+			return parseRes;
+		}
+	} catch (error) {
+		return error;
+	}
+}
+
 class Triangle {
-	constructor(side_a, side_b, side_c){
-		this.side_a=side_a;
-		this.side_b=side_b;
-		this.side_c=side_c;
-		if (side_a+side_b<side_c||side_a+side_c<side_b||side_b+side_c<side_a) {
-			const err=new Error("Треугольник с такими сторонами не существует");
-			throw err;
+	constructor(firstSide, secondSide, thrirdSide) {
+		this.firstSide = firstSide;
+		this.secondSide = secondSide;
+		this.thrirdSide = thrirdSide;
+		if (firstSide + secondSide < thrirdSide || firstSide + thrirdSide < secondSide || secondSide + thrirdSide < firstSide) {
+			throw new Error("Треугольник с такими сторонами не существует");
 		}
 	}
 
 	get perimeter() {
-		return this.side_a+this.side_b+this.side_c;
+		return this.firstSide + this.secondSide + this.thrirdSide;
 	}
 
 	get area() {
-		return parseCount(Math.sqrt(this.perimeter/2*(this.perimeter/2-this.side_a)*(this.perimeter/2-this.side_b)*(this.perimeter/2-this.side_c)).toFixed(3));
+		let halfPerimetr = this.perimeter / 2;
+		return Number.parseFloat(Math.sqrt(halfPerimetr * (halfPerimetr - this.firstSide) * (halfPerimetr - this.secondSide) * (halfPerimetr - this.thrirdSide)).toFixed(3));
 	}
 
 }
 
-function getTriangle(side_a, side_b, side_c) {
+class triangle {
+	get perimeter() {
+		return "Ошибка! Треугольник не существует";
+	}
+	get area() {
+		return "Ошибка! Треугольник не существует";
+	}
+}
+
+function getTriangle(firstSide, secondSide, thrirdSide) {
 	try {
-		 const triangle=new Triangle(side_a, side_b, side_c);
-		 return triangle;
-		} catch (err) {
-				   triangle.area="Ошибка! Треугольник не существует";
-				   triangle.perimeter="Ошибка! Треугольник не существует";
-			return (triangle);
-		}	
+		let triangle = new Triangle(firstSide, secondSide, thrirdSide);
+		return triangle;
+	} catch (err) {
+		return new triangle();
+	}
 }
