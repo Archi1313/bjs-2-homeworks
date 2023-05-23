@@ -39,7 +39,7 @@ class Triangle {
 
 }
 
-class triangle {
+class PseudoTriangle {
 	get perimeter() {
 		return "Ошибка! Треугольник не существует";
 	}
@@ -53,6 +53,6 @@ function getTriangle(firstSide, secondSide, thrirdSide) {
 		let triangle = new Triangle(firstSide, secondSide, thrirdSide);
 		return triangle;
 	} catch (err) {
-		return new triangle();
+		return new PseudoTriangle;
 	}
 }
